@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ExternalLink, Building2, Calendar, MapPin, Star } from 'lucide-react'
+import { ExternalLink, Building2, Calendar, MapPin, Star, ArrowUpRight } from 'lucide-react'
 
 const experiences = [
   {
@@ -45,39 +45,52 @@ const Experience = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="experience" className="section-padding" ref={ref}>
+    <section id="experience" className="section-padding relative" ref={ref}>
       <div className="container-width">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center gap-4">
-            <span className="text-blue-400 font-mono text-xl">02.</span>
-            Where I've Worked
-            <span className="h-px bg-slate-700 flex-1 max-w-xs" />
-          </h2>
+          <div className="flex items-center gap-4 mb-12">
+            <span className="text-violet-400 font-mono text-lg">02.</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Where I've Worked</h2>
+            <div className="h-px bg-gradient-to-r from-violet-500/50 to-transparent flex-1 max-w-xs" />
+          </div>
 
           <div className="flex flex-col md:flex-row gap-8">
             {/* Tab Navigation */}
-            <div className="flex md:flex-col overflow-x-auto md:overflow-visible border-b md:border-b-0 md:border-l border-slate-700">
+            <div className="flex md:flex-col overflow-x-auto md:overflow-visible">
               {experiences.map((exp, index) => (
-                <button
+                <motion.button
                   key={exp.company}
                   onClick={() => setActiveTab(index)}
-                  className={`px-4 py-3 text-left whitespace-nowrap text-sm font-medium transition-all duration-300 border-b-2 md:border-b-0 md:border-l-2 -mb-px md:mb-0 md:-ml-px ${
+                  whileHover={{ x: 4 }}
+                  className={`relative px-6 py-4 text-left whitespace-nowrap text-sm font-medium transition-all duration-300 ${
                     activeTab === index
-                      ? 'text-blue-400 border-blue-400 bg-blue-400/10'
-                      : 'text-slate-400 border-transparent hover:text-blue-400 hover:bg-slate-800/50'
+                      ? 'text-violet-400'
+                      : 'text-white/50 hover:text-white/80'
                   }`}
                 >
-                  {exp.company.split(' ')[0]}
-                </button>
+                  {/* Active indicator */}
+                  <span
+                    className={`absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-violet-500 to-pink-500 transition-opacity duration-300 ${
+                      activeTab === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                  {/* Hover/Active background */}
+                  <span
+                    className={`absolute inset-0 bg-gradient-to-r from-violet-500/10 to-transparent transition-opacity duration-300 ${
+                      activeTab === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                  <span className="relative">{exp.company.split(' ')[0]}</span>
+                </motion.button>
               ))}
             </div>
 
             {/* Tab Content */}
-            <div className="flex-1 min-h-[400px]">
+            <div className="flex-1 min-h-[450px]">
               {experiences.map((exp, index) => (
                 <motion.div
                   key={exp.company}
@@ -89,31 +102,34 @@ const Experience = () => {
                   transition={{ duration: 0.3 }}
                   className={activeTab === index ? 'block' : 'hidden'}
                 >
-                  <h3 className="text-xl font-semibold text-white mb-1">
+                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">
                     {exp.position}{' '}
-                    <span className="text-blue-400">@ {exp.company}</span>
+                    <span className="gradient-text">@ {exp.company}</span>
                   </h3>
 
-                  <div className="flex flex-wrap gap-4 text-slate-400 text-sm mb-4">
-                    <span className="flex items-center gap-1">
-                      <Calendar size={14} />
+                  <div className="flex flex-wrap gap-4 text-white/40 text-sm mb-6">
+                    <span className="flex items-center gap-2">
+                      <Calendar size={14} className="text-violet-400" />
                       {exp.duration}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin size={14} />
+                    <span className="flex items-center gap-2">
+                      <MapPin size={14} className="text-pink-400" />
                       {exp.location}
                     </span>
                   </div>
 
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-4 mb-8">
                     {exp.description.map((item, i) => (
-                      <li
+                      <motion.li
                         key={i}
-                        className="text-slate-400 flex items-start gap-2"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="text-white/60 flex items-start gap-3"
                       >
-                        <span className="text-blue-400 mt-1.5">▹</span>
+                        <span className="text-violet-400 mt-1">▹</span>
                         {item}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
 
@@ -122,53 +138,58 @@ const Experience = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="card-glass p-6 glow"
+                      transition={{ delay: 0.3 }}
+                      className="relative group"
                     >
-                      <div className="flex items-start justify-between gap-4 mb-4">
-                        <div className="flex items-center gap-2">
-                          <Star
-                            className="text-yellow-400 fill-yellow-400"
-                            size={20}
-                          />
-                          <span className="text-xs font-medium text-yellow-400 uppercase tracking-wider">
-                            Featured Project
-                          </span>
-                        </div>
-                        <a
-                          href={exp.featuredProject.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
-                        >
-                          Visit Project
-                          <ExternalLink size={16} />
-                        </a>
-                      </div>
+                      {/* Glow effect */}
+                      <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 via-pink-600/20 to-cyan-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                      <h4 className="text-xl font-bold text-white mb-3">
-                        {exp.featuredProject.name}
-                      </h4>
-
-                      <p className="text-slate-400 mb-4 leading-relaxed">
-                        {exp.featuredProject.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {exp.featuredProject.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-medium border border-blue-500/20"
+                      <div className="relative card-glass p-6 md:p-8">
+                        <div className="flex items-start justify-between gap-4 mb-6">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-lg">
+                              <Star className="text-amber-400 fill-amber-400" size={18} />
+                            </div>
+                            <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">
+                              Featured Project
+                            </span>
+                          </div>
+                          <motion.a
+                            href={exp.featuredProject.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 text-violet-400 hover:text-white
+                                     bg-violet-500/10 hover:bg-violet-500/20 border border-violet-500/30
+                                     rounded-lg transition-all duration-300 text-sm font-medium group/btn"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                           >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                            Visit Project
+                            <ArrowUpRight size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                          </motion.a>
+                        </div>
 
-                      <p className="text-sm text-slate-500 flex items-center gap-2">
-                        <Building2 size={14} />
-                        {exp.featuredProject.impact}
-                      </p>
+                        <h4 className="text-2xl font-bold text-white mb-4">
+                          {exp.featuredProject.name}
+                        </h4>
+
+                        <p className="text-white/50 mb-6 leading-relaxed">
+                          {exp.featuredProject.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {exp.featuredProject.techStack.map((tech) => (
+                            <span key={tech} className="tech-tag">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        <p className="text-sm text-white/40 flex items-center gap-2">
+                          <Building2 size={14} className="text-cyan-400" />
+                          {exp.featuredProject.impact}
+                        </p>
+                      </div>
                     </motion.div>
                   )}
                 </motion.div>

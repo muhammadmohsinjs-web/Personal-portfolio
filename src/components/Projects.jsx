@@ -1,37 +1,27 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ExternalLink, Github, Folder } from 'lucide-react'
+import { ExternalLink, Folder, ArrowUpRight } from 'lucide-react'
 
 const featuredProjects = [
   {
     title: 'Madares Platform',
     description:
       'A comprehensive educational platform serving schools across Saudi Arabia. Built with modern React architecture, featuring real-time updates, role-based dashboards, and seamless integration with backend services.',
-    image: null,
+    image: '/assets/madares.png',
     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Redux', 'REST API'],
     liveUrl: 'https://madares.sa/',
-    githubUrl: null,
     featured: true,
+    color: 'violet',
   },
   {
-    title: 'E-Commerce Dashboard',
+    title: 'AI Sidekick',
     description:
-      'A full-featured admin dashboard for e-commerce platforms with real-time analytics, inventory management, and order tracking capabilities.',
-    image: null,
-    techStack: ['React', 'TypeScript', 'Chart.js', 'Node.js', 'MongoDB'],
-    liveUrl: '#',
-    githubUrl: '#',
+      'An intelligent AI-powered productivity platform that helps users automate tasks, generate content, and streamline workflows with advanced machine learning capabilities.',
+    image: '/assets/ai-sidekick.png',
+    techStack: ['React', 'Next.js', 'TypeScript', 'AI/ML', 'Tailwind CSS'],
+    liveUrl: 'https://www.trysidekick.io/',
     featured: true,
-  },
-  {
-    title: 'Task Management App',
-    description:
-      'A collaborative task management application with drag-and-drop functionality, real-time sync, and team collaboration features.',
-    image: null,
-    techStack: ['React', 'Redux Toolkit', 'Firebase', 'Framer Motion'],
-    liveUrl: '#',
-    githubUrl: '#',
-    featured: true,
+    color: 'pink',
   },
 ]
 
@@ -41,42 +31,36 @@ const otherProjects = [
     description: 'A weather application with location-based forecasts, interactive maps, and historical data visualization.',
     techStack: ['React', 'OpenWeather API', 'Leaflet'],
     liveUrl: '#',
-    githubUrl: '#',
   },
   {
     title: 'Portfolio Template',
     description: 'A customizable portfolio template built with modern web technologies and smooth animations.',
     techStack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
     liveUrl: '#',
-    githubUrl: '#',
   },
   {
     title: 'Recipe Finder',
     description: 'A recipe search application with filtering, favorites, and meal planning features.',
     techStack: ['React', 'TypeScript', 'Spoonacular API'],
     liveUrl: '#',
-    githubUrl: '#',
   },
   {
     title: 'Markdown Editor',
     description: 'A real-time markdown editor with live preview, syntax highlighting, and export options.',
     techStack: ['React', 'CodeMirror', 'Marked.js'],
     liveUrl: '#',
-    githubUrl: '#',
   },
   {
     title: 'Chat Application',
     description: 'A real-time chat application with private messaging, group chats, and file sharing.',
     techStack: ['React', 'Socket.io', 'Express', 'MongoDB'],
     liveUrl: '#',
-    githubUrl: '#',
   },
   {
     title: 'Expense Tracker',
     description: 'A personal finance tracker with budget management, reports, and data visualization.',
     techStack: ['React', 'D3.js', 'LocalStorage'],
     liveUrl: '#',
-    githubUrl: '#',
   },
 ]
 
@@ -84,109 +68,113 @@ const Projects = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  const getGradientClass = (color) => {
+    const gradients = {
+      violet: 'from-violet-600/30 to-purple-600/30',
+      pink: 'from-pink-600/30 to-rose-600/30',
+      cyan: 'from-cyan-600/30 to-blue-600/30',
+    }
+    return gradients[color] || gradients.violet
+  }
+
   return (
-    <section id="projects" className="section-padding" ref={ref}>
+    <section id="projects" className="section-padding relative" ref={ref}>
       <div className="container-width">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 flex items-center gap-4">
-            <span className="text-blue-400 font-mono text-xl">03.</span>
-            Some Things I've Built
-            <span className="h-px bg-slate-700 flex-1 max-w-xs" />
-          </h2>
+          <div className="flex items-center gap-4 mb-16">
+            <span className="text-violet-400 font-mono text-lg">03.</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Some Things I've Built</h2>
+            <div className="h-px bg-gradient-to-r from-violet-500/50 to-transparent flex-1 max-w-xs" />
+          </div>
 
           {/* Featured Projects */}
-          <div className="space-y-24 mb-24">
+          <div className="space-y-32 mb-32">
             {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`relative grid md:grid-cols-12 gap-4 items-center ${
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                className={`relative grid md:grid-cols-12 gap-8 items-center ${
                   index % 2 === 1 ? 'md:text-right' : ''
                 }`}
               >
                 {/* Project Image/Placeholder */}
-                <div
-                  className={`md:col-span-7 ${
-                    index % 2 === 1 ? 'md:col-start-6' : ''
-                  }`}
+                <motion.div
+                  className={`md:col-span-7 ${index % 2 === 1 ? 'md:col-start-6' : ''}`}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <div className="relative group">
-                    <div className="aspect-video bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-lg overflow-hidden glow">
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-6xl font-bold gradient-text opacity-30">
-                          {project.title.charAt(0)}
-                        </span>
-                      </div>
+                    {/* Glow effect */}
+                    <div className={`absolute -inset-4 bg-gradient-to-r ${getGradientClass(project.color)} rounded-2xl blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
+
+                    <div className={`relative aspect-video bg-gradient-to-br ${getGradientClass(project.color)} rounded-2xl overflow-hidden`}>
+                      {project.image ? (
+                        <>
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover object-top"
+                          />
+                          <div className="absolute inset-0 bg-[#0a0a1a]/20 group-hover:bg-transparent transition-colors duration-500" />
+                        </>
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-[#0a0a1a]/60" />
+                          <div className="w-full h-full flex items-center justify-center relative">
+                            <span className="text-8xl font-bold gradient-text opacity-40">
+                              {project.title.charAt(0)}
+                            </span>
+                          </div>
+                        </>
+                      )}
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    <div className="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent transition-colors duration-300 rounded-lg" />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Project Content */}
                 <div
-                  className={`md:col-span-6 ${
+                  className={`md:col-span-6 relative z-10 ${
                     index % 2 === 1
                       ? 'md:col-start-1 md:row-start-1'
                       : 'md:col-start-6'
-                  } md:absolute md:w-1/2 ${
+                  } md:absolute md:w-[55%] ${
                     index % 2 === 1 ? 'md:left-0' : 'md:right-0'
                   }`}
                 >
-                  <p className="text-blue-400 font-mono text-sm mb-2">
-                    Featured Project
-                  </p>
-                  <h3 className="text-2xl font-bold text-white mb-4">
+                  <p className="text-violet-400 font-mono text-sm mb-3">Featured Project</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-5 group">
                     {project.title}
                   </h3>
-                  <div className="card-glass p-6 mb-4">
-                    <p className="text-slate-400">{project.description}</p>
+                  <div className="card-glass p-6 mb-5">
+                    <p className="text-white/60 leading-relaxed">{project.description}</p>
                   </div>
-                  <div
-                    className={`flex flex-wrap gap-3 mb-4 ${
-                      index % 2 === 1 ? 'md:justify-end' : ''
-                    }`}
-                  >
+                  <div className={`flex flex-wrap gap-3 mb-5 ${index % 2 === 1 ? 'md:justify-end' : ''}`}>
                     {project.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-slate-400 text-sm font-mono"
-                      >
+                      <span key={tech} className="text-white/40 text-sm font-mono">
                         {tech}
                       </span>
                     ))}
                   </div>
-                  <div
-                    className={`flex gap-4 ${
-                      index % 2 === 1 ? 'md:justify-end' : ''
-                    }`}
-                  >
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-blue-400 transition-colors"
-                        aria-label="GitHub Repository"
-                      >
-                        <Github size={22} />
-                      </a>
-                    )}
+                  <div className={`flex gap-4 ${index % 2 === 1 ? 'md:justify-end' : ''}`}>
                     {project.liveUrl && (
-                      <a
+                      <motion.a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-blue-400 transition-colors"
+                        className="p-2 text-white/50 hover:text-violet-400 transition-colors"
+                        whileHover={{ scale: 1.1, y: -2 }}
                         aria-label="Live Demo"
                       >
                         <ExternalLink size={22} />
-                      </a>
+                      </motion.a>
                     )}
                   </div>
                 </div>
@@ -195,60 +183,52 @@ const Projects = () => {
           </div>
 
           {/* Other Projects */}
-          <h3 className="text-2xl font-bold text-white text-center mb-8">
-            Other Noteworthy Projects
-          </h3>
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+              Other Noteworthy Projects
+            </h3>
+            <p className="text-white/40">A collection of projects I've worked on</p>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {otherProjects.map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                className="card-glass p-6 hover:-translate-y-2 transition-transform duration-300 group"
+                transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="card-glass-hover p-6 group cursor-pointer"
               >
                 <div className="flex justify-between items-start mb-6">
-                  <Folder className="text-blue-400" size={40} />
+                  <div className="p-3 bg-gradient-to-br from-violet-500/10 to-pink-500/10 rounded-xl">
+                    <Folder className="text-violet-400" size={28} />
+                  </div>
                   <div className="flex gap-3">
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-blue-400 transition-colors"
-                        aria-label="GitHub"
-                      >
-                        <Github size={20} />
-                      </a>
-                    )}
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-blue-400 transition-colors"
+                        className="text-white/40 hover:text-violet-400 transition-colors"
                         aria-label="Live Demo"
                       >
-                        <ExternalLink size={20} />
+                        <ArrowUpRight size={20} />
                       </a>
                     )}
                   </div>
                 </div>
 
-                <h4 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                <h4 className="text-xl font-semibold text-white mb-3 group-hover:text-violet-400 transition-colors">
                   {project.title}
                 </h4>
-                <p className="text-slate-400 text-sm mb-4 leading-relaxed">
+                <p className="text-white/50 text-sm mb-5 leading-relaxed">
                   {project.description}
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-slate-500 text-xs font-mono"
-                    >
+                    <span key={tech} className="text-white/30 text-xs font-mono">
                       {tech}
                     </span>
                   ))}
