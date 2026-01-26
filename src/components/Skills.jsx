@@ -76,6 +76,7 @@ const skillCategories = [
       { name: 'Webpack', level: 80 },
       { name: 'Jest', level: 78 },
       { name: 'Agentic AI', level: 80 },
+      { name: 'MonoRepo Architecture', level: 85 },
       { name: 'Figma', level: 85 },
       { name: 'VS Code', level: 95 },
     ],

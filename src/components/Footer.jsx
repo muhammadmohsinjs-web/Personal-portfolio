@@ -11,7 +11,7 @@ const Footer = () => {
     {
       name: 'Email',
       icon: Mail,
-      href: 'mailto:muhammad.mohsin.js@gmail.com',
+      href: 'https://mail.google.com/mail/?view=cm&fs=1&to=muhammad.mohsin.js@gmail.com',
     },
   ]
 

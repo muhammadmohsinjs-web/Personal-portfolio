@@ -106,13 +106,13 @@ const Hero = () => {
             <motion.div variants={itemVariants} className="flex items-center gap-4">
               {[
                 { icon: Linkedin, href: 'https://www.linkedin.com/in/muhammad-mohsin-029649178/', label: 'LinkedIn' },
-                { icon: Mail, href: 'mailto:muhammad.mohsin.js@gmail.com', label: 'Email' },
+                { icon: Mail, href: 'https://mail.google.com/mail/?view=cm&fs=1&to=muhammad.mohsin.js@gmail.com', label: 'Email' },
               ].map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label}
                   href={href}
-                  target={href.startsWith('http') || href.startsWith('mailto:') ? '_blank' : undefined}
-                  rel={href.startsWith('http') || href.startsWith('mailto:') ? 'noopener noreferrer' : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-2.5 text-white/40 hover:text-violet-400 transition-colors duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}

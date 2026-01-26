@@ -12,7 +12,7 @@ const Contact = () => {
       label: 'Email Me',
       description: 'For job opportunities',
       action: 'Send email',
-      href: 'mailto:muhammad.mohsin.js@gmail.com',
+      href: 'https://mail.google.com/mail/?view=cm&fs=1&to=muhammad.mohsin.js@gmail.com',
       primary: true,
     },
     {
@@ -80,8 +80,8 @@ const Contact = () => {
               <motion.a
                 key={option.label}
                 href={option.href}
-                target={option.href.startsWith('http') || option.href.startsWith('mailto:') ? '_blank' : undefined}
-                rel={option.href.startsWith('http') || option.href.startsWith('mailto:') ? 'noopener noreferrer' : undefined}
+                target={option.href.startsWith('http') ? '_blank' : undefined}
+                rel={option.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 + index * 0.1 }}
@@ -120,7 +120,7 @@ const Contact = () => {
           >
             <p className="text-white/30 text-sm mb-4">or reach me directly at</p>
             <a
-              href="mailto:muhammad.mohsin.js@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=muhammad.mohsin.js@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-violet-400 transition-colors text-lg font-medium"
