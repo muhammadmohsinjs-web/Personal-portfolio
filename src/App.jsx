@@ -6,12 +6,14 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import AnimatedBackground from './components/AnimatedBackground'
 
 function App() {
   return (
     <div className="min-h-screen gradient-bg">
+      <AnimatedBackground />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <About />
         <Experience />
