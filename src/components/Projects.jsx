@@ -7,7 +7,7 @@ const featuredProjects = [
     title: 'Madares Platform',
     description:
       'A comprehensive educational platform serving schools across Saudi Arabia. Built with modern React architecture, featuring real-time updates, role-based dashboards, and seamless integration with backend services.',
-    image: '/assets/madares.png',
+    image: `${import.meta.env.BASE_URL}assets/madares.png`,
     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Redux', 'REST API'],
     liveUrl: 'https://madares.sa/',
     featured: true,
@@ -17,7 +17,7 @@ const featuredProjects = [
     title: 'AI Sidekick',
     description:
       'An intelligent AI-powered productivity platform that helps users automate tasks, generate content, and streamline workflows with advanced machine learning capabilities.',
-    image: '/assets/ai-sidekick.png',
+    image: `${import.meta.env.BASE_URL}assets/ai-sidekick.png`,
     techStack: ['React', 'Next.js', 'TypeScript', 'AI/ML', 'Tailwind CSS'],
     liveUrl: 'https://www.trysidekick.io/',
     featured: true,

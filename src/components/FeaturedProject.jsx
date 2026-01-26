@@ -147,7 +147,7 @@ const FeaturedProject = () => {
                 {/* Screenshot */}
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
-                    src="/assets/madares.png"
+                    src={`${import.meta.env.BASE_URL}assets/madares.png`}
                     alt="Madares Platform Screenshot"
                     className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
                   />

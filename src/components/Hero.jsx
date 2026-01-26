@@ -92,7 +92,7 @@ const Hero = () => {
                 </span>
               </a>
               <a
-                href="/resume.pdf"
+                href={`${import.meta.env.BASE_URL}resume.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline flex items-center gap-2"
@@ -136,7 +136,7 @@ const Hero = () => {
 
               <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden border-2 border-white/10">
                 <img
-                  src="/assets/mohsin_pic.png"
+                  src={`${import.meta.env.BASE_URL}assets/mohsin_pic.png`}
                   alt="Muhammad Mohsin"
                   className="w-full h-full object-cover"
                 />

@@ -64,7 +64,7 @@ const Navbar = () => {
               </motion.a>
             ))}
             <motion.a
-              href="/resume.pdf"
+              href={`${import.meta.env.BASE_URL}resume.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: -20 }}
@@ -113,7 +113,7 @@ const Navbar = () => {
                     </motion.a>
                   ))}
                   <motion.a
-                    href="/resume.pdf"
+                    href={`${import.meta.env.BASE_URL}resume.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, x: -20 }}

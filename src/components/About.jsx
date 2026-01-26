@@ -100,7 +100,7 @@ const About = () => {
                 <div className="relative">
                   <div className="w-full aspect-square rounded-2xl overflow-hidden bg-[#0a0a1a]">
                     <img
-                      src="/assets/mohsin_pic.png"
+                      src={`${import.meta.env.BASE_URL}assets/mohsin_pic.png`}
                       alt="Muhammad Mohsin"
                       className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                     />
